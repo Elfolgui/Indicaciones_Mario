@@ -17,9 +17,6 @@ Controlador.rellenar_pantalla(ventana, Colores)
 
 reloj = Controlador.iniciar_reloj()
 
-Lista_Ayuda = ["a", "y", "u", "d", "a", "  ", "a", "  ", "m", "a", "r", "i","o","  ","a",
-                "  ","l","l","e","g","a","r","  ","a","l","  ","p","o","l","i",]
-
 Lista_Primer_Oracion = ["l", "o", "s", "               ", "r" , "e", "p", "r", "e", "s", "e", "n", "t", "a", "n",
                         "  ", "t", "u", "s", "  ", "v", "i", "d", "a", "s"]
 
@@ -32,7 +29,7 @@ Lista_Tercera_Oracion = ["s", "a", "l", "t", "a", "  ", "d", "e", "b", "a", "j",
 Lista_Cuarta_Oracion = ["c","u","i","d","a","d","o","  ","c","o","n","  ","l","o","s",
                         "               ","q","u","e","  ","t","e","  ","s","a","c","a","n",]
 
-Ayuda_Texto = ""
+Ayuda_Texto = "ayuda  a  mario  a  llegar  al  poli"
 
 Primer_Oracion_texto = ""
 
@@ -56,8 +53,6 @@ Tercera_Oracion = Palabra(80, 500, Colores["Blanco"], Tercera_Oracion_texto, 50)
 
 Cuarta_Oracion = Palabra(80, 600, Colores["Blanco"], Cuarta_Oracion_texto, 50)
 
-posicion_Ayuda = 0
-
 posicion_h1 = 0
 
 posicion_h2 = 0
@@ -74,9 +69,7 @@ frames_entre_escritura = 0
 
 crecimiento = 0
 
-Titulo = True
-
-Primera = False
+Primera = True
 
 Segunda = False
 
@@ -106,20 +99,6 @@ while True:
     Controlador.set_fps(reloj, FPS)
     Controlador.buscar_eventos()
     Controlador.rellenar_pantalla(ventana, Colores)
-
-    if Titulo and frames_escritura + 15 < frames_totales:
-        frames_escritura = frames_totales
-        Ayuda_Texto += Lista_Ayuda[posicion_Ayuda]
-        Ayuda.Escritura(Colores["Blanco"], Ayuda_Texto, True)
-        posicion_Ayuda += 1
-        if posicion_Ayuda == 30:
-            frames_entre_escritura = frames_totales
-
-    if posicion_Ayuda >= 30 and aux:
-        Primera = True
-        frames_escritura = frames_totales
-        Titulo = False
-        aux = False
 
     if frames_entre_escritura + 150 < frames_totales:
 
