@@ -70,6 +70,8 @@ frames_escritura = 0
 
 frames_temporales = 0
 
+frames_entre_escritura = 0
+
 crecimiento = 0
 
 Titulo = True
@@ -90,7 +92,7 @@ Corazon = Sprite(190, 290, 60, 60, "Corazon.png")
 
 Corazon_2 = Sprite(645, 390, 60, 60, "Corazon.png")
 
-Corazon_3 = Sprite(900, 590, 60, 60, "Corazon.png")
+Corazon_3 = Sprite(915, 590, 60, 60, "Corazon.png")
 
 Moneda = Sprite(1080, 490, 60, 60, "Moneda_1.png")
 
@@ -110,6 +112,8 @@ while True:
         Ayuda_Texto += Lista_Ayuda[posicion_Ayuda]
         Ayuda.Escritura(Colores["Blanco"], Ayuda_Texto, True)
         posicion_Ayuda += 1
+        if posicion_Ayuda == 30:
+            frames_entre_escritura = frames_totales
 
     if posicion_Ayuda >= 30 and aux:
         Primera = True
@@ -117,66 +121,72 @@ while True:
         Titulo = False
         aux = False
 
-    if Primera and frames_escritura + 15 < frames_totales:
-        frames_escritura = frames_totales
-        Primer_Oracion_texto += Lista_Primer_Oracion[posicion_h1]
-        Primer_Oracion.Escritura(Colores["Blanco"], Primer_Oracion_texto, False)
-        posicion_h1 += 1
-        if posicion_h1 == 4:
-            Base.Grupo.add(Corazon)
+    if frames_entre_escritura + 150 < frames_totales:
 
-    if Primera and posicion_h1 >= 25:
-        frames_escritura = frames_totales
-        Segunda = True
-        Primera = False
+        if Primera and frames_escritura + 15 < frames_totales:
+            frames_escritura = frames_totales
+            Primer_Oracion_texto += Lista_Primer_Oracion[posicion_h1]
+            Primer_Oracion.Escritura(Colores["Blanco"], Primer_Oracion_texto, False)
+            posicion_h1 += 1
+            if posicion_h1 == 4:
+                Base.Grupo.add(Corazon)
 
-    if Segunda and frames_escritura + 15 < frames_totales:
-        frames_escritura = frames_totales
-        Segunda_Oracion_texto += Lista_Segunda_Oracion[posicion_h2]
-        Segunda_Oracion.Escritura(Colores["Blanco"], Segunda_Oracion_texto, False)
-        posicion_h2 += 1
-        if posicion_h2 == 4:
-            Base.Grupo.add(Hongo)
-        if posicion_h2 == 17:
-            Base.Grupo.add(Corazon_2)
+        if Primera and posicion_h1 >= 25:
+            frames_escritura = frames_totales
+            frames_entre_escritura = frames_totales
+            Segunda = True
+            Primera = False
 
-    if Segunda and posicion_h2 >= 17:
-        frames_escritura = frames_totales
-        Segunda = False
-        Tercera = True
+        if Segunda and frames_escritura + 15 < frames_totales:
+            frames_escritura = frames_totales
+            Segunda_Oracion_texto += Lista_Segunda_Oracion[posicion_h2]
+            Segunda_Oracion.Escritura(Colores["Blanco"], Segunda_Oracion_texto, False)
+            posicion_h2 += 1
+            if posicion_h2 == 4:
+                Base.Grupo.add(Hongo)
+            if posicion_h2 == 17:
+                Base.Grupo.add(Corazon_2)
 
-    if Tercera and frames_escritura + 15 < frames_totales:
-        frames_escritura = frames_totales
-        Tercera_Oracion_texto += Lista_Tercera_Oracion[posicion_h3]
-        Tercera_Oracion.Escritura(Colores["Blanco"], Tercera_Oracion_texto, False)
-        posicion_h3 += 1
-        if posicion_h3 == 22:
-            Base.Grupo.add(Signo)
-        if posicion_h3 == 34:
-            Base.Grupo.add(Moneda)
-        if posicion_h3 == 36:
-            Base.Grupo.add(Hongo_2)
+        if Segunda and posicion_h2 >= 17:
+            frames_escritura = frames_totales
+            frames_entre_escritura = frames_totales
+            Segunda = False
+            Tercera = True
 
-    if Tercera and posicion_h3 >= 36:
-        print("Entro")
-        frames_escritura = frames_totales
-        Tercera = False
-        Cuarta = True
+        if Tercera and frames_escritura + 15 < frames_totales:
+            frames_escritura = frames_totales
+            Tercera_Oracion_texto += Lista_Tercera_Oracion[posicion_h3]
+            Tercera_Oracion.Escritura(Colores["Blanco"], Tercera_Oracion_texto, False)
+            posicion_h3 += 1
+            if posicion_h3 == 22:
+                Base.Grupo.add(Signo)
+            if posicion_h3 == 34:
+                Base.Grupo.add(Moneda)
+            if posicion_h3 == 36:
+                Base.Grupo.add(Hongo_2)
 
-    if Cuarta and frames_escritura + 15 < frames_totales:
-        print("Entre")
-        frames_escritura = frames_totales
-        Cuarta_Oracion_texto += Lista_Cuarta_Oracion[posicion_h4]
-        Cuarta_Oracion.Escritura(Colores["Blanco"], Cuarta_Oracion_texto, False)
-        posicion_h4 += 1
-        if posicion_h4 == 15:
-            Base.Grupo.add(Enemigo)
-        if posicion_h4 == 28:
-            Base.Grupo.add(Corazon_3)
+        if Tercera and posicion_h3 >= 36:
+            print("Entro")
+            frames_escritura = frames_totales
+            frames_entre_escritura = frames_totales
+            Tercera = False
+            Cuarta = True
 
-    if posicion_h4 >= 28:
-        frames_escritura = frames_totales
-        Cuarta = False
+        if Cuarta and frames_escritura + 15 < frames_totales:
+            print("Entre")
+            frames_escritura = frames_totales
+            Cuarta_Oracion_texto += Lista_Cuarta_Oracion[posicion_h4]
+            Cuarta_Oracion.Escritura(Colores["Blanco"], Cuarta_Oracion_texto, False)
+            posicion_h4 += 1
+            if posicion_h4 == 15:
+                Base.Grupo.add(Enemigo)
+            if posicion_h4 == 28:
+                Base.Grupo.add(Corazon_3)
+
+        if posicion_h4 >= 28:
+            frames_escritura = frames_totales
+            frames_entre_escritura = frames_totales
+            Cuarta = False
 
     ventana.blit(Ayuda.Palabra, (Ayuda.posX, Ayuda.posY))
     ventana.blit(Primer_Oracion.Palabra, (Primer_Oracion.posX, Primer_Oracion.posY))
