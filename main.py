@@ -23,11 +23,14 @@ Lista_Ayuda = ["a", "y", "u", "d", "a", "  ", "a", "  ", "m", "a", "r", "i","o",
 Lista_Primer_Oracion = ["l", "o", "s", "               ", "r" , "e", "p", "r", "e", "s", "e", "n", "t", "a", "n",
                         "  ", "t", "u", "s", "  ", "v", "i", "d", "a", "s"]
 
-Lista_Segunda_Oracion = ["s", "e", "  ", "e", "l", "  ", "m", "a", "s", "  ", "r", "a", "p", "i", "d", "o",
-                          "  ", "e", "n", "  ", "l", "l", "e", "g", "a", "r"]
+Lista_Segunda_Oracion = ["l","o","s","               ", "t","e","  ","a","g","r","e","g","a","n","  ","u","n"]
 
-Lista_Tercera_Oracion = ["c", "u", "i", "d", "a", "d", "o", "  ", "c", "o", "n", "  ", "l",
-                          "o", "s", "  ", "e", "n", "e", "m", "i", "g", "o", "s"]
+Lista_Tercera_Oracion = ["s", "a", "l", "t", "a", "  ", "d", "e", "b", "a", "j", "o", "  ",
+                         "d", "e", "  ", "e", "s", "t", "o", "s", "                ",
+                         "p", "a", "r", "a", "  ", "o", "b","t","e","n","e","r","            ", "o"]
+
+Lista_Cuarta_Oracion = ["c","u","i","d","a","d","o","  ","c","o","n","  ","l","o","s",
+                        "               ","q","u","e","  ","t","e","  ","s","a","c","a","n",]
 
 Ayuda_Texto = ""
 
@@ -36,6 +39,8 @@ Primer_Oracion_texto = ""
 Segunda_Oracion_texto = ""
 
 Tercera_Oracion_texto = ""
+
+Cuarta_Oracion_texto = ""
 
 frames_totales = 0
 
@@ -49,6 +54,8 @@ Segunda_Oracion = Palabra(80, 400, Colores["Blanco"], Segunda_Oracion_texto, 50)
 
 Tercera_Oracion = Palabra(80, 500, Colores["Blanco"], Tercera_Oracion_texto, 50)
 
+Cuarta_Oracion = Palabra(80, 600, Colores["Blanco"], Cuarta_Oracion_texto, 50)
+
 posicion_Ayuda = 0
 
 posicion_h1 = 0
@@ -57,7 +64,11 @@ posicion_h2 = 0
 
 posicion_h3 = 0
 
+posicion_h4 = 0
+
 frames_escritura = 0
+
+frames_temporales = 0
 
 crecimiento = 0
 
@@ -69,18 +80,32 @@ Segunda = False
 
 Tercera = False
 
+Cuarta = False
+
 aux = True
+
+Enemigo = Sprite(485, 590, 60, 60, "Enemigo.png")
 
 Corazon = Sprite(190, 290, 60, 60, "Corazon.png")
 
-Moneda = Sprite(190, 390, 60, 60, "Moneda_1.png")
+Corazon_2 = Sprite(645, 390, 60, 60, "Corazon.png")
+
+Corazon_3 = Sprite(900, 590, 60, 60, "Corazon.png")
+
+Moneda = Sprite(1080, 490, 60, 60, "Moneda_1.png")
+
+Hongo = Sprite(190, 390, 60, 60, "hongo.png")
+
+Hongo_2 = Sprite(1190, 490, 60, 60, "hongo.png")
+
+Signo = Sprite(655, 490, 60, 60, "signo.png")
 
 while True:
     Controlador.set_fps(reloj, FPS)
     Controlador.buscar_eventos()
     Controlador.rellenar_pantalla(ventana, Colores)
 
-    if Titulo and frames_escritura + 5 < frames_totales:
+    if Titulo and frames_escritura + 15 < frames_totales:
         frames_escritura = frames_totales
         Ayuda_Texto += Lista_Ayuda[posicion_Ayuda]
         Ayuda.Escritura(Colores["Blanco"], Ayuda_Texto, True)
@@ -92,7 +117,7 @@ while True:
         Titulo = False
         aux = False
 
-    if Primera and frames_escritura + 5 < frames_totales:
+    if Primera and frames_escritura + 15 < frames_totales:
         frames_escritura = frames_totales
         Primer_Oracion_texto += Lista_Primer_Oracion[posicion_h1]
         Primer_Oracion.Escritura(Colores["Blanco"], Primer_Oracion_texto, False)
@@ -105,31 +130,59 @@ while True:
         Segunda = True
         Primera = False
 
-#    if Segunda and frames_escritura + 5 < frames_totales:
-#        frames_escritura = frames_totales
-#        Segunda_Oracion_texto += Lista_Segunda_Oracion[posicion_h2]
-#        Segunda_Oracion.Escritura(Colores["Blanco"], Segunda_Oracion_texto, False)
-#        posicion_h2 += 1
+    if Segunda and frames_escritura + 15 < frames_totales:
+        frames_escritura = frames_totales
+        Segunda_Oracion_texto += Lista_Segunda_Oracion[posicion_h2]
+        Segunda_Oracion.Escritura(Colores["Blanco"], Segunda_Oracion_texto, False)
+        posicion_h2 += 1
+        if posicion_h2 == 4:
+            Base.Grupo.add(Hongo)
+        if posicion_h2 == 17:
+            Base.Grupo.add(Corazon_2)
 
-#    if Segunda and posicion_h2 >= 26:
-#        frames_escritura = frames_totales
-#        Segunda = False
-#        Tercera = True
+    if Segunda and posicion_h2 >= 17:
+        frames_escritura = frames_totales
+        Segunda = False
+        Tercera = True
 
-#    if Tercera and frames_escritura + 5 < frames_totales:
-#        frames_escritura = frames_totales
-#        Tercera_Oracion_texto += Lista_Tercera_Oracion[posicion_h3]
-#        Tercera_Oracion.Escritura(Colores["Blanco"], Tercera_Oracion_texto, False)
-#        posicion_h3 += 1
+    if Tercera and frames_escritura + 15 < frames_totales:
+        frames_escritura = frames_totales
+        Tercera_Oracion_texto += Lista_Tercera_Oracion[posicion_h3]
+        Tercera_Oracion.Escritura(Colores["Blanco"], Tercera_Oracion_texto, False)
+        posicion_h3 += 1
+        if posicion_h3 == 22:
+            Base.Grupo.add(Signo)
+        if posicion_h3 == 34:
+            Base.Grupo.add(Moneda)
+        if posicion_h3 == 36:
+            Base.Grupo.add(Hongo_2)
 
-#    if posicion_h3 >= 24:
-#        frames_escritura = frames_totales
-#        Tercera = False
+    if Tercera and posicion_h3 >= 36:
+        print("Entro")
+        frames_escritura = frames_totales
+        Tercera = False
+        Cuarta = True
+
+    if Cuarta and frames_escritura + 15 < frames_totales:
+        print("Entre")
+        frames_escritura = frames_totales
+        Cuarta_Oracion_texto += Lista_Cuarta_Oracion[posicion_h4]
+        Cuarta_Oracion.Escritura(Colores["Blanco"], Cuarta_Oracion_texto, False)
+        posicion_h4 += 1
+        if posicion_h4 == 15:
+            Base.Grupo.add(Enemigo)
+        if posicion_h4 == 28:
+            Base.Grupo.add(Corazon_3)
+
+    if posicion_h4 >= 28:
+        frames_escritura = frames_totales
+        Cuarta = False
 
     ventana.blit(Ayuda.Palabra, (Ayuda.posX, Ayuda.posY))
     ventana.blit(Primer_Oracion.Palabra, (Primer_Oracion.posX, Primer_Oracion.posY))
-#    ventana.blit(Segunda_Oracion.Palabra, (Segunda_Oracion.posX, Segunda_Oracion.posY))
-#    ventana.blit(Tercera_Oracion.Palabra, (Tercera_Oracion.posX, Tercera_Oracion.posY))
+    ventana.blit(Segunda_Oracion.Palabra, (Segunda_Oracion.posX, Segunda_Oracion.posY))
+    ventana.blit(Tercera_Oracion.Palabra, (Tercera_Oracion.posX, Tercera_Oracion.posY))
+    ventana.blit(Cuarta_Oracion.Palabra, (Cuarta_Oracion.posX, Cuarta_Oracion.posY))
     Base.Grupo.draw(ventana)
     pygame.display.update()
     frames_totales += 1
